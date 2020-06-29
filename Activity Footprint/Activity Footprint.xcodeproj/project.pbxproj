@@ -16,6 +16,8 @@
 		97B051E924A964A300F6EC25 /* Activity_FootprintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B051E824A964A300F6EC25 /* Activity_FootprintTests.swift */; };
 		97B051F424A964A300F6EC25 /* Activity_FootprintUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B051F324A964A300F6EC25 /* Activity_FootprintUITests.swift */; };
 		97B0520424A964D500F6EC25 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B0520324A964D500F6EC25 /* HealthKit.framework */; };
+		97B0520724A969DB00F6EC25 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B0520624A969DB00F6EC25 /* HealthKitSetupAssistant.swift */; };
+		97B0520A24A96E6300F6EC25 /* WorkoutsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B0520924A96E6300F6EC25 /* WorkoutsDataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		97B051F524A964A300F6EC25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97B0520124A964D500F6EC25 /* Activity Footprint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Activity Footprint.entitlements"; sourceTree = "<group>"; };
 		97B0520324A964D500F6EC25 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		97B0520624A969DB00F6EC25 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
+		97B0520924A96E6300F6EC25 /* WorkoutsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsDataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 		97B051D024A964A200F6EC25 /* Activity Footprint */ = {
 			isa = PBXGroup;
 			children = (
+				97B0520824A96E5400F6EC25 /* Workout */,
+				97B0520524A969A500F6EC25 /* Health */,
 				97B0520124A964D500F6EC25 /* Activity Footprint.entitlements */,
 				97B051D124A964A200F6EC25 /* AppDelegate.swift */,
 				97B051D324A964A200F6EC25 /* SceneDelegate.swift */,
@@ -140,6 +146,22 @@
 				97B0520324A964D500F6EC25 /* HealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		97B0520524A969A500F6EC25 /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				97B0520624A969DB00F6EC25 /* HealthKitSetupAssistant.swift */,
+			);
+			path = Health;
+			sourceTree = "<group>";
+		};
+		97B0520824A96E5400F6EC25 /* Workout */ = {
+			isa = PBXGroup;
+			children = (
+				97B0520924A96E6300F6EC25 /* WorkoutsDataStore.swift */,
+			);
+			path = Workout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,7 +296,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				97B051D624A964A200F6EC25 /* ViewController.swift in Sources */,
+				97B0520724A969DB00F6EC25 /* HealthKitSetupAssistant.swift in Sources */,
 				97B051D224A964A200F6EC25 /* AppDelegate.swift in Sources */,
+				97B0520A24A96E6300F6EC25 /* WorkoutsDataStore.swift in Sources */,
 				97B051D424A964A200F6EC25 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
