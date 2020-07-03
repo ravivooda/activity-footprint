@@ -10,36 +10,58 @@ import HealthKit
 
 class HealthKitSetupAssistant {
     
+    static let defaultCharacteristicsTypes: [HKCharacteristicTypeIdentifier] = [
+        .dateOfBirth,
+        .bloodType,
+        .biologicalSex,
+    ]
+    
+    static let defaultQuantityTypes: [HKQuantityTypeIdentifier] = [
+        .bodyMassIndex,
+        .height,
+        .heartRate,
+        .bodyMass,
+    ]
+    
+    static let defaultHKObjectTypes : [HKObjectType] = [
+        HKObjectType.workoutType(),
+        HKSeriesType.workoutRoute(),
+    ]
+    
     private enum HealthkitSetupError: Error {
         case notAvailableOnDevice
         case dataTypeNotAvailable
     }
     
-    class func authorizeHealthKit(completion: @escaping (Bool, Error?) -> Swift.Void) {
+    class func authorizeHealthKit(
+        characteristicsTypes: [HKCharacteristicTypeIdentifier] = defaultCharacteristicsTypes,
+        quantityTypes: [HKQuantityTypeIdentifier] = defaultQuantityTypes,
+        otherObjectTypes: [HKObjectType] = defaultHKObjectTypes,
+        completion: @escaping (Bool, Error?) -> Swift.Void) {
         guard HKHealthStore.isHealthDataAvailable() else {
             completion(false, HealthkitSetupError.notAvailableOnDevice)
             return
         }
         
-        guard let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth),
-            let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType),
-            let biologicalSex = HKObjectType.characteristicType(forIdentifier: .biologicalSex),
-            let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
-            let height = HKObjectType.quantityType(forIdentifier: .height),
-            let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass) else {
-                completion(false, HealthkitSetupError.dataTypeNotAvailable)
-                return
+        var healthKitTypesToRead = Set<HKObjectType>()
+        
+        for characteristic in characteristicsTypes {
+            guard let characteristicType = HKObjectType.characteristicType(forIdentifier: characteristic) else {
+                return completion(false, HealthkitSetupError.dataTypeNotAvailable)
+            }
+            healthKitTypesToRead.insert(characteristicType)
         }
         
-        let healthKitTypesToRead: Set<HKObjectType> = [
-            dateOfBirth,
-            bloodType,
-            biologicalSex,
-            bodyMassIndex,
-            height,
-            bodyMass,
-            HKObjectType.workoutType()
-        ]
+        for quantity in quantityTypes {
+            guard let quantityType = HKObjectType.quantityType(forIdentifier: quantity) else {
+                return completion(false, HealthkitSetupError.dataTypeNotAvailable)
+            }
+            healthKitTypesToRead.insert(quantityType)
+        }
+        
+        for other in otherObjectTypes {
+            healthKitTypesToRead.insert(other)
+        }
         
         HKHealthStore().requestAuthorization(toShare: nil, read: healthKitTypesToRead) { (success, error) in
             completion(success, error)

@@ -12,36 +12,42 @@ import HealthKit
 
 class WorkoutDataStore {
     class func loadWorkouts(completion: @escaping ([HKWorkout]?, Error?) -> Void) {
-        //1. Get all workouts with the "Other" activity type.
-        let workoutPredicate = HKQuery.predicateForWorkouts(with: .other)
+        let store = HKHealthStore()
+        let workoutPredicate = HKQuery.predicateForWorkouts(with: .running)
         
-        //2. Get all workouts that only came from this app.
-        let sourcePredicate = HKQuery.predicateForObjects(from: .default())
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [workoutPredicate])
         
-        //3. Combine the predicates into a single predicate.
-        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [workoutPredicate, sourcePredicate])
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
         
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: true)
-        
-        let query = HKSampleQuery(
-          sampleType: .workoutType(),
-          predicate: compound,
-          limit: 0,
-          sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+        let query = HKSampleQuery(sampleType: .workoutType(), predicate: compound, limit: 10, sortDescriptors: [sortDescriptor]) { (query, samples, error) in
             DispatchQueue.main.async {
-              guard
-                let samples = samples as? [HKWorkout],
-                error == nil
-                else {
-                  completion(nil, error)
-                  return
-              }
-              
-              completion(samples, nil)
-            }
-          }
+                guard let samples = samples as? [HKWorkout], error == nil else {
+                    completion(nil, error)
+                    return
+                }
+                
+                completion(samples, nil)
+                
+                for sample in samples {
+                    let runningObjectQuery = HKQuery.predicateForObjects(from: sample)
 
-        HKHealthStore().execute(query)
+                    let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
+                        
+                        guard let samples = samples, error == nil else {
+                            // Handle any errors here.
+                            print("Error occurred in handling workout route request \(sample), error: \(error)")
+                            return
+                        }
+                        
+                        // Process the initial route data here.
+                        print("For sample \(sample), route data is \(samples)")
+                    }
+                    
+                    store.execute(routeQuery)
+                }
+            }
+        }
+        
+        store.execute(query)
     }
-    
 }
