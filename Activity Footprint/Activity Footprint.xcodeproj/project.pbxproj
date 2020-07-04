@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9798B5A024AEFF3C00FA9DEF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9798B59F24AEFF3C00FA9DEF /* MapKit.framework */; };
+		9798B5A424AF002800FA9DEF /* ActivityFootprintWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B5A324AF002800FA9DEF /* ActivityFootprintWorkout.swift */; };
 		97B051D224A964A200F6EC25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B051D124A964A200F6EC25 /* AppDelegate.swift */; };
 		97B051D424A964A200F6EC25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B051D324A964A200F6EC25 /* SceneDelegate.swift */; };
 		97B051D624A964A200F6EC25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B051D524A964A200F6EC25 /* ViewController.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9798B59F24AEFF3C00FA9DEF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9798B5A324AF002800FA9DEF /* ActivityFootprintWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFootprintWorkout.swift; sourceTree = "<group>"; };
 		97B051CE24A964A200F6EC25 /* Activity Footprint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Activity Footprint.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B051D124A964A200F6EC25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97B051D324A964A200F6EC25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9798B5A024AEFF3C00FA9DEF /* MapKit.framework in Frameworks */,
 				97B0520424A964D500F6EC25 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +148,7 @@
 		97B0520224A964D500F6EC25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9798B59F24AEFF3C00FA9DEF /* MapKit.framework */,
 				97B0520324A964D500F6EC25 /* HealthKit.framework */,
 			);
 			name = Frameworks;
@@ -160,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				97B0520924A96E6300F6EC25 /* WorkoutsDataStore.swift */,
+				9798B5A324AF002800FA9DEF /* ActivityFootprintWorkout.swift */,
 			);
 			path = Workout;
 			sourceTree = "<group>";
@@ -299,6 +306,7 @@
 				97B0520724A969DB00F6EC25 /* HealthKitSetupAssistant.swift in Sources */,
 				97B051D224A964A200F6EC25 /* AppDelegate.swift in Sources */,
 				97B0520A24A96E6300F6EC25 /* WorkoutsDataStore.swift in Sources */,
+				9798B5A424AF002800FA9DEF /* ActivityFootprintWorkout.swift in Sources */,
 				97B051D424A964A200F6EC25 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
